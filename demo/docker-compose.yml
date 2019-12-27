@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    image: platziapp
+    environment:
+      MONGO_URL: "mongodb://mongo-db:27017/test"
+    depends_on:
+      - mongo-db
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src
+      - /usr/src/node_modules # Al momento de pasar todo mi currentFolder to /usr/src ignorar los noe_modules para que no los elimine
+
+  mongo-db:
+    image: mongo
